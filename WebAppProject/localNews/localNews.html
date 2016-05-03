@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html ng-app="worldNews" lang="en">
+<html ng-app="localNews" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>USA News</title>
-    <link rel="stylesheet" href="worldc.css">
+    <title>U.S News</title>
+    <link rel="stylesheet" href="localNews.css">
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
 
 </head>
-<body style="width:1238px; background-color: black; position: relative; float: left">
+<body style="background-color: black; position: relative; float: left; width: 100%;">
 
-<div ng-controller="worldNewsController" style=" border: 2px solid yellow;  margin-top:10px;margin-left: 65px; margin-right:90px;  width:1140px; height:100%; background-color:white;position: relative; float: left">
+
+<div ng-controller="localNewsController" style=" border: 2px; margin-left: 10%;  margin-top:10px; width:1140px; height:100%; background-color:white;position: relative; float: left">
 
 
     <div id="navigationNew" >
@@ -22,100 +23,97 @@
         <div style="float: left">
             <ul>
                 <center>
-
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="world.html">World News</a></li>
-                    <li><a href="sports.html">Sports</a></li>
-                    <li><a href="media.html">Entertainment</a></li>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="../localNews/localNews.html">Home</a></li>
+                    <li><a href="../worldNews/worldnews.html">World News</a></li>
+                    <li><a href="../sportNews/sports.html">Sports</a></li>
+                    <li><a href="../entertainmentNews/index.html">Entertainment</a></li>
+                    <li><a href="../about%20us/about.html">About Us</a></li>
                 </center>
-
             </ul>
         </div>
 
     </div>
 
+    <div style="position: relative; float: left">
+        <div style=" width:750px; margin-left: 21px; margin-top: 3px; float: left; position: relative;">
 
-    <div style=" width:750px; margin-left: 21px; margin-top: 3px; float: left">
+            <div style="width:750px; height: 400px; float: left; position:relative; overflow: hidden">
 
-        <div style="width:720px; margin-bottom:45px; float: left; position:relative;">
+                <uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
+                    <uib-slide ng-repeat="slide in slides track by slide.id" index="slide.id">
+                        <a href="{{slide.web_url}}" target="_blank">
+                            <img width="600" height="400" ng-src="{{slide.image}}" style="margin:auto;">
+                        </a>
+                        <div class="carousel-caption">
+                            <p>{{slide.text}}</p>
+                        </div>
+                    </uib-slide>
+                </uib-carousel>
 
-            <uib-carousel interval="myInterval" no-wrap="noWrapSlides">
-                <uib-slide ng-repeat="slide in slides track by slide.id" index="slide.id">
-                    <img ng-src="{{slide.image}}" style="margin:auto;">
-                    <div class="carousel-caption">
-                        <h4>Slide {{slide.id}}</h4>
-                        <p>{{slide.text}}</p>
+            </div>
+
+            <div style="width:720px; margin-left: 10px; margin-top: 10px; margin-bottom:45px;  float: left; position: relative">
+
+                <div class="main-heads">
+                    <span style="font-size: 19px">MORE ARTICLES</span>
+                </div>
+
+                <div class="moreLatest-article" ng-repeat="article in news">
+
+                    <img ng-show="article.multimedia[0].url" width="190" height="126" src="{{'http://www.nytimes.com/'+ article.multimedia[0].url}}" alt="" />
+                    <div style="width: 230px; float: left; margin-top: 5px;">
+                        <span style="font-weight: bold; font-size: larger">{{article.headline.main}} </span>
+
                     </div>
-                </uib-slide>
-            </uib-carousel>
+                    <div style="width: 230px; float: left; margin-top: 5px;">
+                        <span>{{article.snippet}}</span>
 
+                    </div>
+                    <div style="width: 230px; float: left; margin-top: 5px;">
+                        <a href="{{article.web_url}}" target="_blank"><span style="color: red">READ MORE</span></a>
 
-        </div>
-
-        <div style="width:720px; height: 450px; margin-left: 10px; margin-top: 10px; margin-bottom:45px;  float: left">
-
-
-            <div class="main-heads">
-                <span style="font-size: 19px">MORE ARTICLES</span>
-            </div>
-
-            <div class="moreLatest-article" >
-
-                <img width="350" height="180" src="" alt="" />
-                <div style="width: 350px; float: left; margin-top: 5px;">
-                    <span style="font-weight: bold; font-size: larger">Lorem ipsum dolor sit amet, consectetur </span>
-
+                    </div>
                 </div>
-                <div style="width: 350px; float: left; margin-top: 5px;">
-                    <span>Nulla quis lorem neque, mattis venenatis lectus. In interdum ullamcorper dolor eu mattis.</span>
 
-                </div>
-                <div style="width: 350px; float: left; margin-top: 5px;">
-                    <a href=""><span style="color: red">READ MORE</span></a>
 
-                </div>
             </div>
 
 
         </div>
 
+
+        <div style="width:290px; margin-left: 40px; margin-bottom:10px; float:left; position: relative">
+
+
+            <div style="float:left; width: 280px; border-bottom:4px solid #cf0000; margin-top: 10px;">
+
+                <span style="float: left; color: red; font-size: 20px; padding: 4px;">popular</span>
+                <span style="float: right; font-size: 20px; padding: 4px;">Most Read</span>
+            </div>
+
+            <div class="sideBar" ng-repeat="article in newsPopular">
+                <div style="">
+                    <span style=" font-size: 10px; font-style: italic ">{{article.pub_date | date}}</span>
+                </div>
+                <div style="">
+                    <span style="float: left; font-size: 13px; font-weight: bold ">{{article.headline.main}}<a href="{{article.web_url}}" target="_blank" style="color: red ; font-weight: 100">Read More</a></span>
+                </div>
+            </div>
+        </div>
 
     </div>
 
-
-    <div style="width:290px; margin-left: 40px; margin-bottom:10px; float:left;">
-
-
-        <div style="float:left; width: 280px; border-bottom:4px solid #cf0000; margin-top: 10px;">
-
-            <span style="float: left; color: red; font-size: 20px; padding: 4px;">popular</span>
-            <span style="float: right; font-size: 20px; padding: 4px;">Most Read</span>
-        </div>
-
-        <div class="sideBar">
-            <div style="">
-                <span style=" font-size: 10px; font-style: italic ">Sept 24th 2011 </span>
-            </div>
-            <div style="">
-                <span style="float: left; font-size: 13px; font-weight: bold ">Lorem ipsum dolor sit amet conse ctetur adipiscing elit <a href="" style="color: red ; font-weight: 100">Read More</a></span>
-            </div>
-        </div>
-    </div>
-
-    <div style="border-top:1px dotted #202021; width: 1090px; height: 100px;  float:left; margin-left: 26px;">
+    <div style="border-top:1px dotted #202021; width: 1090px; height: 100px;  float:left; margin-left: 26px;position: relative">
 
 
         <div id="footer" class="text-center">
             <div class="bottom-menu">
                 <ul>
-                    <li><a href="index.html">Home</a></li> |
-                    <li><a href="worldnews.html">World News</a></li> |
-                    <li><a href="sports.html">Sports</a></li> |
-                    <li><a href="media.html">Entertainment</a></li> |
-                    <li><a href="about.html">About Us</a></li> |
-                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="../localNews/localNews.html">Home</a></li> |
+                    <li><a href="../worldNews/worldnews.html">World News</a></li> |
+                    <li><a href="../sportNews/sports.html">Sports</a></li> |
+                    <li><a href="../entertainmentNews/index.html">Entertainment</a></li> |
+                    <li><a href="../about%20us/about.html">About Us</a></li> |
                 </ul>
             </div>
             <div class="copyright text-center">
@@ -129,11 +127,11 @@
 
 
 </body>
-
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"> </script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.js"> </script>
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.js"></script>
 <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.3.2.js"></script>
-
+<script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.16/angular-resource.min.js"></script>
 <script src="app.js"></script>
+
 
 </html>

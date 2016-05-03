@@ -2,9 +2,9 @@
  * Created by aysenurerdem on 4/30/16.
  */
 
-var app = angular.module('worldNews', ['ngAnimate', 'ui.bootstrap','ngResource']);
+var app = angular.module('localNews', ['ngAnimate', 'ui.bootstrap','ngResource']);
 
-app.controller('worldNewsController', function ($scope,newsData,newsDataPopular) {
+app.controller('localNewsController', function ($scope,newsData,newsDataPopular) {
     $scope.news = [];
 
     newsData.get(function(news) {
@@ -43,10 +43,10 @@ app.controller('worldNewsController', function ($scope,newsData,newsDataPopular)
 });
 
 app.factory('newsData', function($resource) {
-    return $resource('http://api.nytimes.com/svc/search/v2/articlesearch.json?fq=section_name%3A%28%22World%22%29&sort=newest&api-key=1d39aab8e807502f1acb713d6e28128b%3A8%3A75170008'); // Note the full endpoint address
+    return $resource('http://api.nytimes.com/svc/search/v2/articlesearch.json?fq=section_name%3A%28%22U.S%22%29&sort=newest&api-key=1d39aab8e807502f1acb713d6e28128b%3A8%3A75170008'); // Note the full endpoint address
 });
 
 app.factory('newsDataPopular', function($resource) {
-    return $resource('http://api.nytimes.com/svc/search/v2/articlesearch.json?fq=section_name%3A%28%22World%22%29&sort=newest&page=2&api-key=1d39aab8e807502f1acb713d6e28128b%3A8%3A75170008'); // Note the full endpoint address
+    return $resource('http://api.nytimes.com/svc/search/v2/articlesearch.json?fq=section_name%3A%28%22U.S%22%29&sort=newest&page=2&api-key=1d39aab8e807502f1acb713d6e28128b%3A8%3A75170008'); // Note the full endpoint address
 });
 
